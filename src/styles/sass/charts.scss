@@ -1,0 +1,57 @@
+
+.fill-brand-info{
+  fill: $brand-info;
+}
+.fill-gray{
+  fill: $gray;
+}
+.fill-danger{
+  fill: $brand-danger;
+}
+.fill-success{
+  fill: $brand-success;
+}
+.fill-warning{
+  fill: $brand-warning;
+}
+
+.fill-blue{
+  fill: $vantiv-blue;
+}
+
+.fill-teal{
+  fill: $vantiv-teal;
+}
+
+.fill-orange-yellow{
+  fill: $vantiv-orange-yellow;
+}
+
+.fill-red{
+  fill: $vantiv-red;
+}
+.fill-gray-light{
+  fill: $gray-light;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: $gray-light;
+  opacity: 0.1;
+  shape-rendering: crispEdges;
+}
+
+.tick line{
+  opacity: 0.9;
+  fill: $gray;
+}
+svg {
+  padding-left: 5em;
+  padding-top: 4em;
+  padding-bottom: 4em;
+  margin-right: 4em; }
+
+  #chartid{
+    background-color: white;
+  }
