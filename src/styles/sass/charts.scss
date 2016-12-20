@@ -34,6 +34,10 @@
   fill: $gray-light;
 }
 
+.fill-gray-dark{
+  fill: $gray-dark;
+}
+
 .axis path,
 .axis line {
   fill: none;
@@ -46,12 +50,17 @@
   opacity: 0.9;
   fill: $gray;
 }
-svg {
-  padding-left: 5em;
-  padding-top: 4em;
-  padding-bottom: 4em;
-  margin-right: 4em; }
 
-  #chartid{
-    background-color: white;
-  }
+.svg-content-responsive {
+  //axes
+  padding-left: 5em;
+  padding-top: 3em;
+  padding-bottom: 2em;
+  //scale graph
+  width: 100%;
+}
+
+#chartid{
+  background-color: white;
+}
+
