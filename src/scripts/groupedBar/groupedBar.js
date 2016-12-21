@@ -4,7 +4,6 @@ export default function groupedBarChart(){
 
 var width = 0;
 var height = 0;
-var margin = {}; 
 var classMap =  {};
 var classMapFunction = function (d){
   return classMap[ d.name ];
@@ -12,16 +11,9 @@ var classMapFunction = function (d){
 var x0;
 var x1;
 var y;
-var xAxis;
-var yAxis;
+var groupRangeFunction;
 
 function chart(svg, data){
-
-  console.log(svg);
-  console.log(data);
-
-  console.log("test");
-
   window.d3 = d3;
 
   // group of bars
@@ -29,23 +21,23 @@ function chart(svg, data){
     .data(data);
 
 
-  var something = 
+  var enterAndUpdate = 
     issuer.enter().append("g")
     .merge(issuer)
     .attr("class", "issuer")
-    .attr("transform", function(d) {return "translate(" + x0(d.Issuer) + ",0)"; })
+    .attr("transform", groupRangeFunction)
   ;
 
   // draw each individual bar
-  var sel = something.selectAll("rect")
-  .data(function(d) { console.log (d.groups); return d.groups; }, (d)=> d.name);
+  var sel = enterAndUpdate.selectAll("rect")
+  .data(function(d) { return d.groups; }, (d)=> d.name);
     
     
     sel
     .enter().append("rect")
     .attr("y", height)
     .merge(sel)
-        .data(function(d) { console.log (d.groups); return d.groups; })
+        .data(function(d) { return d.groups; })
     .attr("width", x1.bandwidth())
     .attr("x", function(d) {  return x1(d.name); })    
 
@@ -88,11 +80,6 @@ function chart(svg, data){
     classMapFunction = value;
     return chart;
   }
-  chart.margin = function(value){
-    if (!arguments.length) return margin;
-    margin = value;
-    return chart;
-  }
   chart.x0 = function(value){
     if (!arguments.length) return x0;
     x0 = value;
@@ -110,15 +97,9 @@ function chart(svg, data){
     return chart;
   }
 
-  chart.xAxis = function(value){
-    if (!arguments.length) return xAxis;
-    xAxis = value;
-    return chart;
-  }
-
-  chart.yAxis = function(value){
-    if (!arguments.length) return yAxis;
-    yAxis = value;
+  chart.groupRangeFunction = function(value){
+    if (!arguments.length) return groupRangeFunction;
+    groupRangeFunction = value;
     return chart;
   }
 
