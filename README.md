@@ -207,7 +207,7 @@ var falsyData = [
 ];
 ```
 
-#### Prepare data for module, define scales, define classes and functios
+#### Prepare data for module, define scales, define classes and functions
 ```
 //split data into chartable groups
 var jsonGroupNames = d3.keys(jsonObj[0]).filter(function(key) { return key !== "Issuer"; }); 
@@ -221,12 +221,14 @@ var x0 = d3.scaleBand()
   .rangeRound([0, width])
   .domain(jsonObj.map(function(d) { return d.Issuer; }))
 ;
+
 //scale for each rectangle within a group
 var x1 = d3.scaleBand()
   .paddingOuter(1)
   .domain(jsonGroupNames)
   .rangeRound([0, x0.bandwidth()])
 ; 
+
 //scale for the y axis
 var y = d3.scaleLinear()
   .range([height, 0])
