@@ -130,7 +130,7 @@ groupRangeFunction( function )
 
 ## Example
 
-#### Creating svg 
+#### Importing module and creating svg 
 ```
 import groupedBarChart from 'groupedBar/groupedBar.js';
 var width = 500;
@@ -207,7 +207,7 @@ var falsyData = [
 ];
 ```
 
-#### Prepare data for module, define scales, define classes and functions
+#### Prepare data for module, define scales, define parameters to be passed to setters
 ```
 //split data into chartable groups
 var jsonGroupNames = d3.keys(jsonObj[0]).filter(function(key) { return key !== "Issuer"; }); 
