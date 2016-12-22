@@ -142,11 +142,11 @@ describe("Test the grouped bar chart", function(){
 	});
 
 	afterEach ( function(){
-		d3.selectAll('svg').remove();
+		d3.selectAll('.svg-container').remove();
 	})
 	
 
-	it('should be created, not null and defined', function() {
+	it('should be created, defined, and not null', function() {
 		expect(d3.selectAll('svg')._groups[0][0]).not.toBeNull();
 		expect(d3.selectAll('svg')._groups[0][0]).toBeDefined();			
 	});
