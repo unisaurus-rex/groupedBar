@@ -40,13 +40,13 @@ function chart(svg, data){
         .data(function(d) { return d.groups; })
     .attr("width", x1.bandwidth())
     .attr("x", function(d) {  return x1(d.name); })    
-
+    .attr("class", classMapFunction)
     .transition()
     .duration(1000)
 
     .attr("y", function(d) {   return y(d.value); })
     .attr("height", function(d) { return height - y(d.value); })
-    .attr("class", classMapFunction)
+    
     //.on('mouseover', tip.show)
     //.on('mouseout', tip.hide)
   ;

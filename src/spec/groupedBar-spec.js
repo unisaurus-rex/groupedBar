@@ -2,7 +2,7 @@ import groupedBarChart from 'groupedBar';
 import * as d3 from "d3";
 
 
-describe("Test the grouped bar chart", function(){
+describe("The grouped bar chart", function(){
 
 	//chart parameters
 	var width = 500;
@@ -27,7 +27,7 @@ describe("Test the grouped bar chart", function(){
 
 	var classMap =  {"Department Store": "fill-blue", "Grocery": "fill-red",
 	"Family Clothing": "fill-gray-light", "Fast Food": "fill-orange-yellow",
-	"Pharmacies": "fill-teal", "Total": "fill-gray-dark" };
+	"Pharmacies": "fill-teal", "Total": "fill-gasdfray-dark" };
 
 	//formatting for y axis
 	var formatPercent = d3.format(".1%");
@@ -160,16 +160,47 @@ describe("Test the grouped bar chart", function(){
 		expect (rect.length).toEqual(36);
 	});
 
-	it('should create every rectangle with one class', function() {
+	it('should create every rectangle with one class', function(done) {
 		//wait for the transition to finish
-		setTimeout(function(){
+		jasmine.clock().install();
+		var classes = 0;
+		setInterval(function(){
 			var rect = d3.selectAll('rect')._groups[0];
-			var classes = 0;
+			
 			for(var i =0; i< rect.length; i++){
 				classes = classes + rect[i].classList.length
-				console.log(rect[i].classList.length);
 			}
-			expect( classes).toEqual(36);
+			
 		}, 2000)
+		jasmine.clock().tick(2001);
+		console.log(classes);
+		expect( classes).toEqual(36);
+		done();
+
+		
 	});
+
+
+/*
+	it('should create rectangles with the correct classes', function(done) {
+		
+
+		setInterval(function(){
+			for(var i =0; i< rect.length; i++){		
+				console.log(rect[i].classList)
+				if ( !(rect[i].classList == "fill-blue" ||
+					 rect[i].classList == "fill-red" ||
+					 rect[i].classList == "fill-gray-light" ||
+					 rect[i].classList == "fill-orange-yellow" ||
+					 rect[i].classList == "fill-teal" || 
+					 rect[i].classList == "fill-gray-dark" ) && test == true){
+						console.log("akjsdfajkdgalglaksgjdlkagjdlaAJGAGJAIGJD");
+						test = false
+				}//end if
+			}
+			expect (test).toBe(true);
+		}, 2000)
+		done();
+
+	});*/
 });
