@@ -27,7 +27,7 @@ describe("The grouped bar chart", function(){
 
 	var classMap =  {"Department Store": "fill-blue", "Grocery": "fill-red",
 	"Family Clothing": "fill-gray-light", "Fast Food": "fill-orange-yellow",
-	"Pharmacies": "fill-teal", "Total": "fill-gasdfray-dark" };
+	"Pharmacies": "fill-teal", "Total": "fill-gray-dark" };
 
 	//formatting for y axis
 	var formatPercent = d3.format(".1%");
@@ -114,19 +114,18 @@ describe("The grouped bar chart", function(){
 	  .range([height, 0])
 	  .domain([0, d3.max(jsonObj, function(d) { return d3.max(d.groups, function(d) { return d.value; }); })]);
 	;
-
+	jasmine.clock().install();
 
 	beforeEach (function(){
-
-	var svg = d3.select("body")
-	  .append("div")
-	  .classed("svg-container", true)
-	  .append("svg")
-	  .attr("preserveAspectRatio", "xMinYMin meet")     
-	  .attr("viewBox","0 0 " + width + " " + height)
-	  //class to make it responsive
-	  .classed("svg-content-responsive", true)
-	;
+		var svg = d3.select("body")
+		  .append("div")
+		  .classed("svg-container", true)
+		  .append("svg")
+		  .attr("preserveAspectRatio", "xMinYMin meet")     
+		  .attr("viewBox","0 0 " + width + " " + height)
+		  //class to make it responsive
+		  .classed("svg-content-responsive", true)
+		;
 		//chart config
 		var test = groupedBarChart()
 		  .width(width)
@@ -162,7 +161,7 @@ describe("The grouped bar chart", function(){
 
 	it('should create every rectangle with one class', function(done) {
 		//wait for the transition to finish
-		jasmine.clock().install();
+		
 		var classes = 0;
 		setInterval(function(){
 			var rect = d3.selectAll('rect')._groups[0];
@@ -172,15 +171,36 @@ describe("The grouped bar chart", function(){
 			}
 			
 		}, 2000)
-		jasmine.clock().tick(2001);
-		console.log(classes);
+		jasmine.clock().tick(2001 /* a space odyssey*/);
 		expect( classes).toEqual(36);
 		done();
 
-		
 	});
 
+	it('should create every rectangle with a valid class', function(done) {
+		
+		var rect = d3.selectAll('rect')._groups[0];
+		var test = true;
+		//wait for the transition to finish
+		//jasmine.clock().install();
+		setInterval(function(){
+			for(var i =0; i< rect.length; i++){		
+				if ( !(rect[i].classList == "fill-blue" ||
+					 rect[i].classList == "fill-red" ||
+					 rect[i].classList == "fill-gray-light" ||
+					 rect[i].classList == "fill-orange-yellow" ||
+					 rect[i].classList == "fill-teal" || 
+					 rect[i].classList == "fill-gray-dark" ) && test == true){
+						test = false
+				}//end if
+			}
+		
+	}, 2000)
+		jasmine.clock().tick(2001 /* a space odyssey*/);
+		expect (test).toBe(true);
+		done();
 
+	});
 /*
 	it('should create rectangles with the correct classes', function(done) {
 		
