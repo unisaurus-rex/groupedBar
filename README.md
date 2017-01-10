@@ -95,7 +95,61 @@ When you try to run your new spec, you may encounter errors loading files import
 4) The constructor function returns a function that takes two parameters: a selection and data
 
 #### Data Structure
-Data should consist of an array of objects with each object representing one group of bars. The data object should also have a columns attribute that consists of all the keys (excluding the unique identifier). Each array index should have a subarray named groups. Each "groups" array index should have a key/value pair with keys named "name" and "value". Each  index of the "groups" array will be drawn as one rectangle in a group. See the data example below.
+Data should consist of an array of objects with each object representing one group of bars. The data object should also have a columns attribute that consists of all the keys. Each array object should have a subarray named groups. Each "groups" array index should have a key/value pair with keys named "name" and "value". Each  index of the "groups" array will be drawn as one rectangle in a group. See the data example below.
+
+#### Example data set for one group
+```
+var falsyData = [
+  {
+    "Issuer": "Issuer 1",
+    "Department Store": 0.0175,
+    "Pharmacies": 0.0045,
+    "Fast Food": 0.0125,
+    "Grocery": 0.015,
+    "Family Clothing": 0.0175,
+    "Total": 0.014
+  },
+];
+falsyData[0].groups = 
+[
+  {
+    "name": "Department Store",
+    "value": 0.0175
+  },
+  {
+    "name": "Pharmacies",
+    "value": 0.0045
+  },
+  {
+    "name": "Fast Food",
+    "value": 0.0125
+  },
+  {
+    "name": "Grocery",
+    "value": 0.015
+  },
+  {
+    "name": "Family Clothing",
+    "value": 0.0175
+  },
+  {
+    "name": "Total",
+    "value": 0.014
+  }
+];
+
+falsyData.columns = 
+[
+  "Issuer",
+  "Department Store",
+  "Pharmacies",
+  "Fast Food",
+  "Grocery",
+  "Family Clothing",
+  "Total"
+]
+
+```
 
 Example: 
 ``` 
@@ -150,73 +204,9 @@ var svg = d3.select("div#chartid")
   .classed("svg-content-responsive", true)
 ;
 ```
-#### Example data set
-```
-var falsyData = [
-  {
-    "Issuer": "Issuer 1",
-    "Department Store": 0.0175,
-    "Pharmacies": 0.0045,
-    "Fast Food": 0.0125,
-    "Grocery": 0.015,
-    "Family Clothing": 0.0175,
-    "Total": 0.014
-  },
-  {
-    "Issuer": "Issuer 2",
-    "Department Store": 0.004,
-    "Pharmacies": 0.006,
-    "Fast Food": 0.004,
-    "Grocery": 0.003,
-    "Family Clothing": 0.0174,
-    "Total": 0.016
-  },
-  {
-    "Issuer": "Issuer 3",
-    "Department Store": 0.0075,
-    "Pharmacies": 0.014,
-    "Fast Food": 0.01,
-    "Grocery": 0.012,
-    "Family Clothing": 0.0025,
-    "Total": 0.02
-  },
-  {
-    "Issuer": "Issuer 4",
-    "Department Store": 0.0114,
-    "Pharmacies": 0.019,
-    "Fast Food": 0.015,
-    "Grocery": 0.016,
-    "Family Clothing": 0.014,
-    "Total": 0.019
-  },
-  {
-    "Issuer": "Your Issues",
-    "Department Store": 0.008,
-    "Pharmacies": 0.02,
-    "Fast Food": 0.004,
-    "Grocery": 0.0075,
-    "Family Clothing": 0.01,
-    "Total": 0.015
-  },
-  {
-    "Issuer": "All",
-    "Department Store": 0.01,
-    "Pharmacies": 0.015,
-    "Fast Food": 0.005,
-    "Grocery": 0.006,
-    "Family Clothing": 0.0025,
-    "Total": 0.02
-  }
-];
-```
 
-#### Prepare data for module, define scales, define parameters to be passed to setters
+#### define scales, define parameters to be passed to setters
 ```
-//split data into chartable groups
-var jsonGroupNames = d3.keys(jsonObj[0]).filter(function(key) { return key !== "Issuer"; }); 
-jsonObj.forEach(function(d) {
-    d.groups = jsonGroupNames.map(function(name) { return {name: name, value: +d[name]}; });
-});
 
 //create scales
 //scale for each group of rectangles

@@ -35,7 +35,7 @@ var formatPercent = d3.format(".1%");
 //define function to define range for a group
 var groupRangeFunction = function(d) {return "translate(" + x0(d.Issuer) + ",0)"; };
   
-var jsonObj = [
+var data = [
   {
     "Issuer": "Issuer 1",
     "Department Store": 0.0175,
@@ -92,9 +92,9 @@ var jsonObj = [
   }
 ];
 
-var jsonGroupNames = d3.keys(jsonObj[0]).filter(function(key) { return key !== "Issuer"; });
+var jsonGroupNames = d3.keys(data[0]).filter(function(key) { return key !== "Issuer"; });
 
-jsonObj.forEach(function(d) {
+data.forEach(function(d) {
   d.groups = jsonGroupNames.map(function(name) { return {name: name, value: +d[name]}; });
 });
 
@@ -102,7 +102,7 @@ jsonObj.forEach(function(d) {
 //create scales
 var x0 = d3.scaleBand()
   .rangeRound([0, width])
-  .domain(jsonObj.map(function(d) { return d.Issuer; }))
+  .domain(data.map(function(d) { return d.Issuer; }))
 ;
 
 var x1 = d3.scaleBand()
@@ -112,7 +112,7 @@ var x1 = d3.scaleBand()
 ; 
 var y = d3.scaleLinear()
   .range([height, 0])
-  .domain([0, d3.max(jsonObj, function(d) { return d3.max(d.groups, function(d) { return d.value; }); })]);
+  .domain([0, d3.max(data, function(d) { return d3.max(d.groups, function(d) { return d.value; }); })]);
 ;
 
 //axes
@@ -162,7 +162,7 @@ var test = groupedBarChart()
 
 window.test=test;
 
-test(svg, jsonObj);
+test(svg, data);
 
 
 d3.csv("scripts/groupedBar/data.csv", function(error, data){
