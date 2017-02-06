@@ -95,7 +95,7 @@ When you try to run your new spec, you may encounter errors loading files import
 4) The constructor function returns a function that takes two parameters: a selection and data
 
 #### Data Structure
-Data should consist of an array of objects with each object representing one group of bars. The data object should also have a columns attribute that consists of all the keys. Each array object should have a subarray named groups. Each "groups" array index should have a key/value pair with keys named "name" and "value". Each  index of the "groups" array will be drawn as one rectangle in a group. See the data example below.
+Data should consist of an array of objects with each object representing one group of bars. The data object should also have a columns attribute that consists of all the keys. Each array object should have an attribute named groups. Each "groups" attribute should have a key/value pair with keys named "name" and "value". See the data example below.
 
 #### Example data set for one group
 ```
